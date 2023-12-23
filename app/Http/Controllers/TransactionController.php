@@ -18,15 +18,15 @@ class TransactionController extends Controller
         return view('transactions.show', compact('transaction'));
     }
 
-    public function export($id)
+    public function export(Transaction $transactions)
     {
-        $transaction = Transaction::byId($id);
-        return view('transactions.export', compact('transaction'));
+        // $transaction = Transaction::byId($id);
+        return view('transactions.export', compact('transactions'));
     }
     
-    public function duplicate($uuid)
+    public function duplicate(Transaction $transaction)
     {
-        $transaction = Transaction::byUUID($uuid);
+        // $transaction = Transaction::byUUID($uuid);
         return view('transactions.duplicate', compact('transaction'));
     }
 }
