@@ -9,10 +9,18 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['uuid', 'amount', 'description', 'user_id'];
+    protected $fillable = ['id','uuid', 'amount', 'description', 'user_id', 'created_at'];
+    public function scopeById($query, $id)
+    {
+        return $query->with('user')->findOrFail($id);
+    }
 
+    public function scopeByUUID($query, $uuid)
+    {
+        return $query->with('user')->where('uuid', $uuid)->firstOrFail();
+    }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }
